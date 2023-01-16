@@ -78,8 +78,12 @@ class MusicApp:
             elif choice == '2':
                 self.play_song("Bazigar")
             elif choice == '3':
-                self.stop_music()
+                self.play_song("Players")
             elif choice == '4':
+                self.play_song("All Night")
+            elif choice == '5':
+                self.stop_music()
+            elif choice == '6':
                 print("Exiting Music App...")
                 break
             else:
