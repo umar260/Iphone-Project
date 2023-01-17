@@ -1,5 +1,10 @@
 # function to open the phone using a given PIN
 class IPhone:
+    def __init__(self, pin):
+        self.pin = pin
+        self.locked = True
+        self.apps = ['Messages', 'Camera', 'Music']
+        
     def open(self, input_pin):
       if self.pin == int(input_pin):
         self.locked = False
@@ -24,7 +29,7 @@ class IPhone:
             elif app_name == "Music":
                 self.music = MusicApp()
                 self.music.open()
-                
+
             elif app_name == "Messages":
                 self.messages = MessagesApp()
                 self.messages.open()
@@ -60,16 +65,6 @@ class CameraApp:
         print("Click!")
         print("Photo Taken!")
 
-# MusicApp class simulates the music app on the iPhone
-class MusicApp:
-    def __init__(self):
-        self.is_playing = False
-        self.current_song = ""
-
-    def open(self):
-        print("Music app opened")
-        self.menu()
-
     # MusicApp class simulates the music app on the iPhone
 class MusicApp:
     def __init__(self):
@@ -85,8 +80,9 @@ class MusicApp:
         while True:
             print("1. Play Daku Song")
             print("2. Play Bazigar Song")
-            print("3. Stop Music")
-            print("4. Exit")
+            print("3. Play All Night")
+            print("4. Stop Music")
+            print("5. Exit")
             choice = input("Enter your choice: ")
 
             if choice == '1':
