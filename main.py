@@ -1,10 +1,12 @@
+import sys
+
 # function to open the phone using a given PIN
 class IPhone:
     def __init__(self, pin):
         self.pin = pin
         self.locked = True
         self.apps = ['Messages', 'Camera', 'Music']
-        
+
     def open(self, input_pin):
       if self.pin == int(input_pin):
         self.locked = False
@@ -29,7 +31,7 @@ class IPhone:
             elif app_name == "Music":
                 self.music = MusicApp()
                 self.music.open()
-
+                
             elif app_name == "Messages":
                 self.messages = MessagesApp()
                 self.messages.open()
@@ -64,6 +66,7 @@ class CameraApp:
     def click_photo(self):
         print("Click!")
         print("Photo Taken!")
+
 
     # MusicApp class simulates the music app on the iPhone
 class MusicApp:
@@ -164,17 +167,16 @@ class MessagesApp:
         print("Message sent.")
 
 
-
+my_iphone = IPhone(1234)
 # This function displays a menu for the user to interact with their IPhone
 def menu():
     # Create an instance of the IPhone class
-    my_iphone = IPhone(1234)
+    
 
     while True:
         # Print the menu options for the user
         print("1. Open IPhone")
-        print("2. Open App")
-        print("3. Exit")
+        print("2. Exit")
         # Get the user's choice
         choice = input("Enter your choice: ")
 
@@ -183,9 +185,24 @@ def menu():
             pin = input("Enter your PIN: ")
             # Attempt to open the iPhone with the provided PIN
             my_iphone.open(pin)
+            if not my_iphone.locked:
+                menu1()
+                
 
         elif choice == '2':
-            # Check if the iPhone is locked
+            # Exit the program
+            print("Exiting...")
+            sys.exit()
+        else:
+            print("Invalid choice. Please try again.")
+
+def menu1():
+    while True:
+        print("1. Open App")
+        print("2. Lock Iphone")
+        choice1 = input("Enter your choice: ")
+
+        if choice1 == '1':
             if not my_iphone.locked:
                 # Get the name of the app the user wants to open
                 app_name = input("Enter the name of the app you want to open: ")
@@ -195,13 +212,15 @@ def menu():
                 # If the iPhone is locked, tell the user to enter the correct PIN
                 print("IPhone is locked. Enter the correct PIN to unlock.")
 
-        elif choice == '3':
-            # Exit the program
-            print("Exiting...")
-            break
-        else:
-            # Handle invalid input
-            print("Invalid choice. Please try again.")
+        elif choice1 == '2':
+            my_iphone.close()
+            menu()
 
-# Call the menu function to start the program
+        else:
+            print("Invalid Choice.Please Try Again")            
+            
+
+
+
+
 menu()
