@@ -12,31 +12,31 @@ class IPhone:
         self.locked = False
         print("IPhone unlocked!")
       else:
-        print("Incorrect PIN. Try again.")
+        print("Incorrect PIN. Please Try again.")
 
-# function to lock the phone
+# function to lock the iphone
     def close(self):
      self.locked = True
      print("IPhone locked.")
 
-# function to open an app on the phone
-    def open_app(self, app_name):
+# function to open the app on the iphone
+    def openapp(self, appname):
      if not self.locked: # check if the phone is locked
-        if app_name in self.apps: # check if the app is installed on the phone
+        if appname in self.apps: # check if the app is installed on the phone
 
-            if app_name == "Camera":
+            if appname == "Camera":
                 self.camera = CameraApp()
                 self.camera.open()
 
-            elif app_name == "Music":
+            elif appname == "Music":
                 self.music = MusicApp()
                 self.music.open()
                 
-            elif app_name == "Messages":
+            elif appname == "Messages":
                 self.messages = MessagesApp()
                 self.messages.open()
         else:
-            print(f"{app_name} is not installed on this IPhone.")
+            print(f"{appname} is not installed on this IPhone.")
      else:
         print("IPhone is locked. Enter the correct PIN to unlock.")
 
@@ -63,9 +63,9 @@ class CameraApp:
                 print("Invalid choice. Please try again.")
 
     # method to click a photo
-    def click_photo(self):
+    def clickphoto(self):
         print("Click!")
-        print("Photo Taken!")
+        print("Photo is Taken!")
 
 
     # MusicApp class simulates the music app on the iPhone
@@ -86,34 +86,34 @@ class MusicApp:
             print("3. Play All Night")
             print("4. Stop Music")
             print("5. Exit")
-            choice = input("Enter your choice: ")
+            selection = input("Enter your choice: ")
 
-            if choice == '1':
+            if selection == '1':
                 self.play_song("Daku")
 
-            elif choice == '2':
+            elif selection == '2':
                 self.play_song("Bazigar")
 
-            elif choice == '3':
+            elif selection == '3':
                 self.play_song("All Night")
 
-            elif choice == '4':
+            elif selection == '4':
                 self.stop_music() # changed play_song("Players") to stop_music()
 
-            elif choice == '5':
+            elif selection == '5':
                 print("Exiting Music App...")
                 break
             else:
                 print("Invalid choice. Please try again.")
                 
     # method to play the song
-    def play_song(self,song_name):
+    def playsong(self,song_name):
         self.current_song =song_name
         self.is_playing = True
         print(f"{song_name}song started")
         
     # method to stop the currently playing song
-    def stop_music(self):
+    def stopmusic(self):
         if self.is_playing:
             self.is_playing = False
             print(f"{self.current_song}song stopped")
@@ -125,7 +125,7 @@ class MessagesApp:
         self.messages = []
         
     def open(self):
-        print("Messages App opened")
+        print("Messages App is opened")
         self.menu()
         
     # menu for messages app
@@ -134,22 +134,22 @@ class MessagesApp:
             print("1. Read Messages")
             print("2. Send Message")
             print("3. Exit")
-            choice = input("Enter your choice: ")
+            selection1 = input("Enter your choice: ")
 
-            if choice == '1':
+            if selection1 == '1':
                 self.read_messages()
 
-            elif choice == '2':
+            elif selection1 == '2':
                 self.send_message()
 
-            elif choice == '3':
+            elif selection1 == '3':
                 print("Exiting Messages App...")
                 break
             else:
                 print("Invalid choice. Please try again.")
 
     # method to read the messages
-    def read_messages(self):
+    def readmessages(self):
         if len(self.messages) > 0:
             for i, message in enumerate(self.messages):
                 print(f"{i+1}. {message}")
@@ -157,17 +157,17 @@ class MessagesApp:
             print("No messages to read.")
             
     # method to send a message
-    def send_message(self):
-        mobile_number = input("Enter mobile number: ")
-        if not mobile_number.isdigit() or len(mobile_number) != 10:
+    def sendmessage(self):
+        mobilenumber = input("Enter mobile number: ")
+        if not mobilenumber.isdigit() or len(mobilenumber) != 10:
             print("Invalid mobile number. Please enter a 10 digit number.")
             return
         message = input("Enter message: ")
-        self.messages.append((mobile_number, message))
+        self.messages.append((mobilenumber, message))
         print("Message sent.")
 
 
-my_iphone = IPhone(1234)
+myiphone = IPhone(1234)
 # This function displays a menu for the user to interact with their IPhone
 def menu():
     # Create an instance of the IPhone class
@@ -184,8 +184,8 @@ def menu():
             # Get the user's PIN
             pin = input("Enter your PIN: ")
             # Attempt to open the iPhone with the provided PIN
-            my_iphone.open(pin)
-            if not my_iphone.locked:
+            myiphone.open(pin)
+            if not myiphone.locked:
                 menu1()
                 
 
@@ -203,17 +203,17 @@ def menu1():
         choice1 = input("Enter your choice: ")
 
         if choice1 == '1':
-            if not my_iphone.locked:
+            if not myiphone.locked:
                 # Get the name of the app the user wants to open
                 app_name = input("Enter the name of the app you want to open: ")
                 # Attempt to open the app
-                my_iphone.open_app(app_name)
+                myiphone.open_app(app_name)
             else:
                 # If the iPhone is locked, tell the user to enter the correct PIN
                 print("IPhone is locked. Enter the correct PIN to unlock.")
 
         elif choice1 == '2':
-            my_iphone.close()
+            myiphone.close()
             menu()
 
         else:
